@@ -1,4 +1,4 @@
-import { Color, PieceSymbol, Square } from "chess.js";
+import { Chess, Color, PieceSymbol, Square } from "chess.js";
 import { useState } from "react";
 import { MOVE } from "../screens/Game";
 
@@ -10,8 +10,12 @@ const ChessBoard = ({
 }: {
   board: ({ square: Square; type: PieceSymbol; color: Color } | null)[][];
   socket: WebSocket;
-  chess: any;
-  setBoard: any;
+  chess: Chess;
+  setBoard: React.Dispatch<
+    React.SetStateAction<
+      ({ square: Square; type: PieceSymbol; color: Color } | null)[][]
+    >
+  >;
 }) => {
   const [from, setFrom] = useState<Square | null>(null);
   // console.log(board);
@@ -34,7 +38,7 @@ const ChessBoard = ({
       setFrom(null);
       chess.move({
         from,
-        to: position
+        to: position,
       });
       setBoard(chess.board());
     }
@@ -67,16 +71,16 @@ const ChessBoard = ({
               }}
             >
               {square && (
-                    <img
-                    src={`/${square.color}${square.type}.png`}
-                    alt={`${square.color}-${square.type}`}
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                        position: "absolute",
-                    }}
-                    />
-                )}
+                <img
+                  src={`/${square.color}${square.type}.png`}
+                  alt={`${square.color}-${square.type}`}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                  }}
+                />
+              )}
             </div>
           ))
         )}
