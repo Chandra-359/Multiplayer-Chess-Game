@@ -1,14 +1,16 @@
 export const Button = ({
   onClick,
   children,
+  className,
 }: {
   onClick: () => void;
   children: React.ReactNode;
+  className?: string;
 }) => {
   return (
     <button
       onClick={onClick}
-      className="p-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+      className={`px-8 py-4 text-2xl bg-green-500 text-white font-bold rounded ${className}`}
     >
       {children}
     </button>
